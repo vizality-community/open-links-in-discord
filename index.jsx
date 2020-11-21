@@ -17,7 +17,7 @@ module.exports = class OpenLinksInDiscord extends Plugin {
         e.preventDefault();
 
         const url = res.props.href;
-        if (url) vizality.api.popup.openWindow({ url });
+        if (url) vizality.api.popups.openWindow({ url });
 
         return false;
       };
