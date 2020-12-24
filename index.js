@@ -1,14 +1,14 @@
-const { patch, unpatch } = require('@vizality/patcher');
-const { getModule } = require('@vizality/webpack');
-const { Plugin } = require('@vizality/entities');
+import { patch, unpatch } from '@vizality/patcher';
+import { getModule } from '@vizality/webpack';
+import { Plugin } from '@vizality/core';
 
-module.exports = class OpenLinksInDiscord extends Plugin {
+export default class OpenLinksInDiscord extends Plugin {
   onStart () {
-    const Anchor = getModule(m => m.default && m.default.displayName === 'Anchor');
+    const Anchor = getModule(m => m.default?.displayName === 'Anchor');
 
     patch('open-links-in-discord', Anchor, 'default', (_, res) => {
       res.props.oClick = res.props.onClick;
-      res.props.onClick = (e) => {
+      res.props.onClick = e => {
         if (!e.shiftKey) {
           res.props.oClick(e);
           return;
@@ -29,4 +29,4 @@ module.exports = class OpenLinksInDiscord extends Plugin {
   onStop () {
     unpatch('open-links-in-discord');
   }
-};
+}
