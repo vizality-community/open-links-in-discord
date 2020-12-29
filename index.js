@@ -1,6 +1,7 @@
 import { patch, unpatch } from '@vizality/patcher';
 import { getModule } from '@vizality/webpack';
 import { Plugin } from '@vizality/core';
+import api from '@vizality/api';
 
 export default class OpenLinksInDiscord extends Plugin {
   onStart () {
@@ -17,7 +18,10 @@ export default class OpenLinksInDiscord extends Plugin {
         e.preventDefault();
 
         const url = res.props.href;
-        if (url) vizality.api.popups.openWindow({ url });
+
+        if (url) {
+          api.popups.openWindow({ url });
+        }
 
         return false;
       };
