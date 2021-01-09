@@ -1,7 +1,7 @@
 {
   "name": "Open Links in Discord",
   "description": "Lets you open links inside a Discord popup window by holding a key and clicking the link.",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "license": "MIT",
   "author": {
     "name": "AAGaming",
