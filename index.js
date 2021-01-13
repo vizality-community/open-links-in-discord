@@ -3,7 +3,7 @@ import { getModule } from '@vizality/webpack';
 import { Plugin } from '@vizality/entities';
 
 export default class OpenLinksInDiscord extends Plugin {
-  onStart () {
+  start () {
     const Anchor = getModule(m => m.default?.displayName === 'Anchor');
 
     patch('open-links-in-discord', Anchor, 'default', (_, res) => {
@@ -19,7 +19,7 @@ export default class OpenLinksInDiscord extends Plugin {
         const url = res.props.href;
 
         if (url) {
-          vizality.api.popups.openWindow({ url });
+          vizality.api.windows.openWindow({ url });
         }
 
         return false;
@@ -29,7 +29,7 @@ export default class OpenLinksInDiscord extends Plugin {
     });
   }
 
-  onStop () {
+  stop () {
     unpatch('open-links-in-discord');
   }
 }
